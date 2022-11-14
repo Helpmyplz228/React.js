@@ -27,6 +27,7 @@ const ForkTsCheckerWebpackPlugin =
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const createEnvironmentHash = require('./webpack/persistentCache/createEnvironmentHash');
+const { triggerAsyncId } = require('async_hooks');
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
@@ -479,6 +480,7 @@ module.exports = function (webpackEnv) {
                 modules: {
                   mode: 'icss',
                 },
+                
               }),
               // Don't consider CSS imports dead code even if the
               // containing package claims to have no side effects.
